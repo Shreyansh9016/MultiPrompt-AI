@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring AI App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f8f9fa;
+        }
+
+        .tab-button {
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            background-color: #e9ecef;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            background-color: #0d6efd;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-button:hover {
+            background-color: #0d6efd;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            border: none;
+            background: white;
+            border-radius: 1rem;
+        }
+
+        .form-control {
+            border-radius: 10px;
+        }
+
+        .btn {
+            border-radius: 30px;
+        }
+
+        .loader {
+            display: none;
+            margin-left: 10px;
+        }
+
+        .section h3 {
+            font-weight: bold;
+        }
+
+        #eli5Result {
+            white-space: pre-wrap;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container py-5">
+    <div class="card shadow-lg p-4">
+
+        <!-- Centered Tabs -->
+        <div class="d-flex justify-content-center flex-wrap gap-2 mb-4">
+            <button class="tab-button active" onclick="switchTab('chat')">Chat</button>
+            <button class="tab-button" onclick="switchTab('recipe')">Recipe Generator</button>
+            <button class="tab-button" onclick="switchTab('planner')">Daily Planner</button>
+            <button class="tab-button" onclick="switchTab('rewriter')">Text Rewriter</button>
+            <button class="tab-button" onclick="switchTab('eli5')">ELI5</button>
+        </div>
+
+        <!-- Chat -->
+        <div id="chat" class="tab-content active section mt-3">
+            <h3>🧠 Ask the AI</h3>
+            <form id="chatForm" onsubmit="submitChatForm(event)">
+                <input type="text" class="form-control mb-3" id="prompt" placeholder="Type your question..." required>
+                <button type="submit" class="btn btn-primary">Ask</button>
+                <div class="spinner-border text-primary loader" id="chatLoader" role="status"></div>
+            </form>
+            <div id="chatResult" class="mt-3 text-primary fw-bold"></div>
+        </div>
+
+        <!-- Recipe -->
+        <div id="recipe" class="tab-content section mt-3">
+            <h3>🍳 Recipe Generator</h3>
+            <form id="recipeForm" onsubmit="submitRecipeForm(event)">
+                <input type="text" class="form-control mb-2" id="ingredients" placeholder="Ingredients" required>
+                <input type="text" class="form-control mb-2" id="cuisine" placeholder="Cuisine">
+                <input type="text" class="form-control mb-3" id="dietaryRestrictions" placeholder="Dietary Restrictions">
+                <button type="submit" class="btn btn-success">Generate Recipe</button>
+                <div class="spinner-border text-success loader" id="recipeLoader" role="status"></div>
+            </form>
+            <div id="recipeResult" class="mt-3 text-success fw-bold"></div>
+        </div>
+
+        <!-- Daily Planner -->
+        <div id="planner" class="tab-content section mt-3">
+            <h3>📅 Daily Planner</h3>
+            <form id="plannerForm" onsubmit="submitPlannerForm(event)">
+                <input type="text" class="form-control mb-3" id="tasks" placeholder="Enter tasks or goals..." required>
+                <button type="submit" class="btn btn-warning">Generate Plan</button>
+                <div class="spinner-border text-warning loader" id="plannerLoader" role="status"></div>
+            </form>
+            <div id="plannerResult" class="mt-3 text-warning fw-bold"></div>
+        </div>
+
+        <!-- Text Rewriter -->
+        <div id="rewriter" class="tab-content section mt-3">
+            <h3>✍️ Rewrite Text</h3>
+            <form id="rewriterForm" onsubmit="submitRewriterForm(event)">
+                <input type="text" class="form-control mb-2" id="inputText" placeholder="Enter your text..." required>
+                <select class="form-select mb-3" id="tone">
+                    <option value="casual" selected>Casual</option>
+                    <option value="formal">Formal</option>
+                    <option value="funny">Funny</option>
+                    <option value="professional">Professional</option>
+                </select>
+                <button type="submit" class="btn btn-dark">Rewrite</button>
+                <div class="spinner-border text-dark loader" id="rewriterLoader" role="status"></div>
+            </form>
+            <div id="rewriterResult" class="mt-3 text-dark fw-bold"></div>
+        </div>
+
+        <!-- ELI5 -->
+        <div id="eli5" class="tab-content section mt-3">
+            <h3>🧒 Explain Like I'm 5</h3>
+            <form id="eli5Form" onsubmit="submitEli5Form(event)">
+                <input type="text" class="form-control mb-3" id="eli5Input" placeholder="Enter a concept/topic..." required>
+                <button type="submit" class="btn btn-info text-white">Explain</button>
+                <div class="spinner-border text-info loader" id="eli5Loader" role="status"></div>
+            </form>
+            <div id="eli5Result" class="mt-3 text-info fw-bold"></div>
+        </div>
+
+    </div>
+</div>
+
+<!-- JS Scripts -->
+<script>
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+        document.querySelector(`[onclick="switchTab('${tabId}')"]`).classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+    }
+
+    async function submitChatForm(event) {
+        event.preventDefault();
+        const prompt = document.getElementById('prompt').value;
+        await fetchAndDisplay(`/ask-ai?prompt=${encodeURIComponent(prompt)}`, document.getElementById('chatLoader'), document.getElementById('chatResult'));
+    }
+
+    async function submitRecipeForm(event) {
+        event.preventDefault();
+        const ingredients = document.getElementById('ingredients').value;
+        const cuisine = document.getElementById('cuisine').value;
+        const restrictions = document.getElementById('dietaryRestrictions').value;
+        const url = `/recipe-generator?ingredients=${encodeURIComponent(ingredients)}&cuisine=${encodeURIComponent(cuisine)}&dietaryRestrictions=${encodeURIComponent(restrictions)}`;
+        await fetchAndDisplay(url, document.getElementById('recipeLoader'), document.getElementById('recipeResult'));
+    }
+
+    async function submitPlannerForm(event) {
+        event.preventDefault();
+        const tasks = document.getElementById('tasks').value;
+        await fetchAndDisplay(`/daily-planner?tasks=${encodeURIComponent(tasks)}`, document.getElementById('plannerLoader'), document.getElementById('plannerResult'));
+    }
+
+    async function submitRewriterForm(event) {
+        event.preventDefault();
+        const input = document.getElementById('inputText').value;
+        const tone = document.getElementById('tone').value;
+        const url = `/rewrite-text?input=${encodeURIComponent(input)}&tone=${encodeURIComponent(tone)}`;
+        await fetchAndDisplay(url, document.getElementById('rewriterLoader'), document.getElementById('rewriterResult'));
+    }
+
+    async function submitEli5Form(event) {
+        event.preventDefault();
+        const topic = document.getElementById('eli5Input').value;
+        await fetchAndDisplay(`/eli5?input=${encodeURIComponent(topic)}`, document.getElementById('eli5Loader'), document.getElementById('eli5Result'));
+    }
+
+    async function fetchAndDisplay(url, loader, resultDiv) {
+        loader.style.display = 'inline-block';
+        resultDiv.innerText = '';
+        try {
+            const response = await fetch(url);
+            const data = await response.text();
+            resultDiv.innerText = data;
+        } catch (error) {
+            resultDiv.innerText = '❌ Error: ' + error;
+        } finally {
+            loader.style.display = 'none';
+        }
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
