@@ -14,21 +14,43 @@
 </div>
 
 ---
+<table style="width:100%;">
+  <tr>
+    <td style="width:33%; text-align:center; padding:5px;">
+      <img src="https://github.com/user-attachments/assets/baf30468-f779-4db6-ad97-261d068b8775" alt="Screenshot 1" style="width:100%; max-width:500px;">
+      <br>
+      Optional caption 1
+    </td>
+    <td style="width:33%; text-align:center; padding:5px;">
+      <img src="https://github.com/user-attachments/assets/9e4062dd-8046-44ea-9297-e5e82276796d" alt="Screenshot 2" style="width:100%; max-width:500px;">
+      <br>
+      Optional caption 2
+    </td>
+    <td style="width:33%; text-align:center; padding:5px;">
+      <img src="https://github.com/user-attachments/assets/6dddd17f-994e-47d8-ac03-0acc9ee221a5" alt="Screenshot 3" style="width:100%; max-width:500px;">
+      <br>
+      Optional caption 3
+    </td>
+  </tr>
+  <tr>
+    <td style="width:33%; text-align:center; padding:5px;">
+      <img src="https://github.com/user-attachments/assets/862c0abc-97c6-4492-81fe-8449c3252309" alt="Screenshot 4" style="width:100%; max-width:500px;">
+      <br>
+      Optional caption 4
+    </td>
+    <td style="width:33%; text-align:center; padding:5px;">
+      <img src="https://github.com/user-attachments/assets/4c564e71-86be-4b9c-b6d8-a13c77511b3b" alt="Screenshot 5" style="width:100%; max-width:500px;">
+      <br>
+      Optional caption 5
+    </td>
+    <td style="width:33%;"></td>
+  </tr>
+</table>
 
-
-# 🚀 MultiPrompt-AI
-
-<div align="center">
-  
-  **Created by [Shreyansh9016](https://github.com/Shreyansh9016)**
-  
-  🗓️ **Created:** 7/19/2025 | 🔄 **Last Updated:** 7/19/2025
-  
-</div>
 
 ## 📖 About
 
-s a sleek, multi-functional AI assistant that simplifies complex tasks like chatting, generating recipes, rewriting text, planning your day, and even explaining tough concepts like you're five. Built with Spring Boot and OpenAI, it brings smart tools into a beautiful, user-friendly interface — all in one place.
+a sleek, multi-functional AI assistant that simplifies complex tasks like chatting, generating recipes, rewriting text, planning your day, and even explaining tough concepts like you're five. Built with Spring Boot and OpenAI, it brings smart tools into a beautiful, user-friendly interface — all in one place.
 
 
 
