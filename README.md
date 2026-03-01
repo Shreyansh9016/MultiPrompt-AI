@@ -14,38 +14,16 @@
 </div>
 
 ---
-<table style="width:100%;">
-  <tr>
-    <td style="width:33%; text-align:center; padding:5px;">
-      <img src="https://github.com/user-attachments/assets/baf30468-f779-4db6-ad97-261d068b8775" alt="Screenshot 1" style="width:100%; max-width:500px;">
-      <br>
-      Ask the AI
-    </td>
-    <td style="width:33%; text-align:center; padding:5px;">
-      <img src="https://github.com/user-attachments/assets/9e4062dd-8046-44ea-9297-e5e82276796d" alt="Screenshot 2" style="width:100%; max-width:500px;">
-      <br>
-      Recipe Generator
-    </td>
-    <td style="width:33%; text-align:center; padding:5px;">
-      <img src="https://github.com/user-attachments/assets/6dddd17f-994e-47d8-ac03-0acc9ee221a5" alt="Screenshot 3" style="width:100%; max-width:500px;">
-      <br>
-      Explain Like I am 5
-    </td>
-  </tr>
-  <tr>
-    <td style="width:33%; text-align:center; padding:5px;">
-      <img src="https://github.com/user-attachments/assets/862c0abc-97c6-4492-81fe-8449c3252309" alt="Screenshot 4" style="width:100%; max-width:500px;">
-      <br>
-      Rewrite Text
-    </td>
-    <td style="width:33%; text-align:center; padding:5px;">
-      <img src="https://github.com/user-attachments/assets/4c564e71-86be-4b9c-b6d8-a13c77511b3b" alt="Screenshot 5" style="width:100%; max-width:500px;">
-      <br>
-      Daily Planner
-    </td>
-    <td style="width:33%;"></td>
-  </tr>
-</table>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/baf30468-f779-4db6-ad97-261d068b8775" alt="Ask the AI" width="30%">
+  <img src="https://github.com/user-attachments/assets/9e4062dd-8046-44ea-9297-e5e82276796d" alt="Recipe Generator" width="30%">
+  <img src="https://github.com/user-attachments/assets/6dddd17f-994e-47d8-ac03-0acc9ee221a5" alt="Explain Like I am 5" width="30%">
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/862c0abc-97c6-4492-81fe-8449c3252309" alt="Rewrite Text" width="30%">
+  <img src="https://github.com/user-attachments/assets/4c564e71-86be-4b9c-b6d8-a13c77511b3b" alt="Daily Planner" width="30%">
+</p>
 
 
 ## 📖 About
